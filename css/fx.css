@@ -1,0 +1,244 @@
+/* =========================================================
+   AURA MAGIC – visual effects (the "old style" animated look)
+
+   How it stays safe on every device:
+   - Everything works without this file. It only adds motion.
+   - Elements are visible by default. Animations start FROM a
+     hidden state and end on the normal state, so nothing can get
+     stuck invisible if an animation is slow or never starts.
+   - All of it is switched on by the class "fx" on <html>. The page
+     turns "fx" off by itself on a slow device, and the visitor can
+     switch it with the "Effects" button.
+   ========================================================= */
+
+/* The live "aura" colour. It follows the outfit you look at. */
+@property --ar { syntax: '<number>'; inherits: true; initial-value: 155; }
+@property --ag { syntax: '<number>'; inherits: true; initial-value: 109; }
+@property --ab { syntax: '<number>'; inherits: true; initial-value: 255; }
+:root { --ar: 155; --ag: 109; --ab: 255; --ease: cubic-bezier(.22, 1, .36, 1); }
+html.fx { transition: --ar .9s ease, --ag .9s ease, --ab .9s ease; scroll-behavior: smooth; }
+
+/* ---------- Loader ---------- */
+.fx .preloader {
+  position: fixed; inset: 0; z-index: 500; background: var(--night-3);
+  display: grid; place-content: center; justify-items: center; gap: 22px;
+  transition: opacity .8s ease .15s, visibility .8s ease .15s;
+  animation: preFail .01s linear 3.4s forwards;           /* hides itself even if the script never finishes */
+}
+.fx.loaded .preloader { opacity: 0; visibility: hidden; }
+@keyframes preFail { to { opacity: 0; visibility: hidden; } }
+.pre-logo { position: relative; width: 132px; height: 132px; }
+.pre-logo img { position: relative; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; animation: logoGlow 2.4s ease-in-out infinite; }
+.pre-logo::before, .pre-logo::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 1px solid rgba(216, 181, 116, .7); animation: ring 2.2s ease-out infinite; }
+.pre-logo::after { animation-delay: 1.1s; }
+@keyframes ring { from { transform: scale(.85); opacity: .9; } to { transform: scale(1.9); opacity: 0; } }
+.pre-text { font: italic 500 1.25rem var(--serif); color: var(--gold); letter-spacing: .02em; }
+.pre-line { width: 150px; height: 1px; background: rgba(255, 255, 255, .15); overflow: hidden; }
+.pre-line i { display: block; height: 100%; width: 40%; background: var(--gold); animation: slide 1.1s ease-in-out infinite; }
+@keyframes slide { from { transform: translateX(-100%); } to { transform: translateX(260%); } }
+
+/* ---------- Hero ---------- */
+.fx .hero { background: none; }
+.fx .hero::before { content: ''; position: absolute; inset: 0; z-index: -2; background: radial-gradient(60% 70% at 78% 48%, rgb(var(--ar) var(--ag) var(--ab) / .30), transparent 70%), var(--night); }
+.fx .sparkles { display: block; position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; }
+
+/* the big logo with pink and blue smoke */
+@keyframes smokeShift { from { transform: translate(-3%, 2%) scale(.96) rotate(-3deg); } to { transform: translate(3%, -2%) scale(1.06) rotate(3deg); } }
+.fx .smoke { display: block; position: absolute; left: -32%; top: -32%; width: 164%; height: 164%; pointer-events: none; -webkit-mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); mask-image: radial-gradient(closest-side, #000 72%, transparent 100%); }
+.fx .logo-tilt { transition: transform .8s var(--ease); will-change: transform; }
+.fx .logo-float { animation: logoFloat 8s ease-in-out infinite; }
+.fx .logo-img-fx { animation: logoGlow 5s ease-in-out infinite; }   /* the glow is baked into this image, so no heavy blending is needed */
+.fx .logo-orbit { display: block; position: absolute; inset: 5.6%; border-radius: 50%; pointer-events: none; animation: spin 10s linear infinite;
+  background: conic-gradient(from 0deg, transparent 0 70%, rgba(255, 224, 170, 0) 70%, rgba(255, 228, 176, .95) 99%, transparent 100%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 2px), #000 calc(100% - 1px), transparent 100%);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 2px), #000 calc(100% - 1px), transparent 100%); }
+.fx .tw { animation: twk 3.4s ease-in-out infinite; animation-delay: var(--d, 0s); opacity: 1; }
+@keyframes logoFloat { 0%, 100% { transform: translateY(0) rotate(-.5deg); } 50% { transform: translateY(-12px) rotate(.5deg); } }
+@keyframes logoGlow { 0%, 100% { opacity: .9; } 50% { opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes twk { 0%, 100% { transform: scale(.2) rotate(0deg); opacity: 0; } 50% { transform: scale(1) rotate(45deg); opacity: 1; } }
+.fx .hero-tagline { text-shadow: 0 0 24px rgb(var(--ar) var(--ag) var(--ab) / .6); }
+
+/* the opening: each part rises in once the loader has gone (it starts hidden, ends on the normal look) */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } }
+@keyframes fadeOnly { from { opacity: 0; } }
+@keyframes logoIn { from { opacity: 0; transform: scale(.78); } }
+@keyframes archIn { from { clip-path: inset(100% 0 0 0); } }
+.fx.loaded .hero-fade { animation: fadeUp 1s var(--ease) .95s backwards; }
+.fx.loaded .logo-in { animation: logoIn 1.8s var(--ease) .25s backwards; }
+.fx.loaded .smoke { animation: fadeOnly 2.4s ease .5s backwards; }
+.fx.loaded .arch { animation: archIn 1.7s var(--ease) .4s backwards; }
+.fx.loaded .halo { animation: fadeOnly 2s ease .8s backwards, breathe 6s ease-in-out 2.8s infinite; }
+.fx.loaded .arch-echo { animation: fadeOnly 1.4s ease 1.3s backwards; }
+.fx.loaded .hero-caption, .fx.loaded .hero-dots { animation: fadeOnly 1s ease 1.4s backwards; }
+
+/* the arch window */
+.fx .halo { animation: breathe 6s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { transform: scale(.94); } 50% { transform: scale(1.05); } }
+.fx .arch { box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .75), 0 0 0 1px rgba(255, 255, 255, .1); }
+.fx .arch .slide { transform: scale(1.1); transition: opacity 1.1s ease, transform 2.2s var(--ease); }
+.fx .arch .slide.is-active { transform: scale(1); }
+.fx .arch-wrap { transition: transform .8s var(--ease); }
+.fx .cap-name, .fx .cap-set { transition: opacity .35s ease, transform .35s ease; }
+.fx .cap-swap .cap-name, .fx .cap-swap .cap-set { opacity: 0; transform: translateY(6px); }
+.fx .hc-btn { transition: background-color .3s, border-color .3s, transform .4s var(--ease); }
+.fx .hc-btn:active { transform: scale(.9); }
+.fx .hc-thumb { transition: opacity .3s, transform .4s var(--ease), width .4s var(--ease), height .4s var(--ease); animation: thumbIn .5s var(--ease) backwards; }
+.fx .hc-thumb:hover { transform: translateY(-3px); }
+.fx .hc-thumb.is-active { box-shadow: 0 0 0 2px var(--night), 0 0 0 4px rgb(var(--ar) var(--ag) var(--ab)), 0 8px 26px -4px rgb(var(--ar) var(--ag) var(--ab) / .7); }
+@keyframes thumbIn { from { opacity: 0; transform: translateY(8px) scale(.9); } }
+.fx .hc-bar { display: block; height: 3px; margin-top: 14px; border-radius: 3px; background: rgba(247, 240, 230, .16); overflow: hidden; }
+.hc-bar i { display: block; height: 100%; background: rgb(var(--ar) var(--ag) var(--ab)); transform: scaleX(0); transform-origin: 0 50%; }
+.hc-bar i.run { animation: dotfill var(--dur, 5.2s) linear forwards; }
+.hero-stage.is-paused .hc-bar i, .hero-stage:hover .hc-bar i { animation-play-state: paused; }
+@keyframes dotfill { to { transform: scaleX(1); } }
+
+/* ---------- Marquee ---------- */
+.fx .marquee-track { margin-inline: 0; animation: marquee 42s linear infinite; }
+.fx .marquee:hover .marquee-track { animation-play-state: paused; }
+.fx .mq-group + .mq-group { display: flex; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ---------- Appear-on-scroll (only below-the-fold items are pre-hidden, and a safety net reveals them) ---------- */
+@keyframes rise { from { opacity: 0; transform: translateY(26px) scale(.985); } }
+.fx .rv.pre { opacity: 0; }
+.fx .rv.in { animation: rise .85s var(--ease) var(--d, 0s) backwards; }
+/* cards: the picture lifts and glows in its own colour, with a shine sweeping across */
+.fx .card-media { transition: box-shadow .6s var(--ease), transform .6s var(--ease); }
+.fx .card-media::after { transition: transform 1s var(--ease); }
+.fx .card:hover .card-media::after { transform: translateX(120%); }
+.fx .card.in .card-body { animation: fadeOnly .6s ease calc(var(--d, 0s) + .35s) backwards; }
+.fx .card-media img, .fx .coll-tile img { transition: transform 1.1s var(--ease); }
+.fx .card:hover .card-media img, .fx .coll-tile:hover img { transform: scale(1.06); }
+.fx .coll-tile { transition: transform .45s var(--ease); }
+.fx .coll-tile:hover { transform: translateY(-5px); outline: 0; box-shadow: 0 22px 40px -20px rgb(var(--ar) var(--ag) var(--ab) / .7); }
+.fx .btn, .fx .mini { transition: transform .35s var(--ease), filter .25s, box-shadow .35s; }
+.fx .btn:hover, .fx .mini:hover { transform: translateY(-2px); }
+
+/* ---------- Outfit pop-up ---------- */
+@keyframes lbBgIn { from { opacity: 0; } }
+@keyframes lbInfoIn { from { opacity: 0; transform: translateY(18px); } }
+@keyframes imgSwap { from { opacity: 0; transform: scale(1.03); } }
+.fx .lb:not([hidden]) { animation: lbBgIn .35s ease; }
+.fx .lb:not([hidden]) .lb-info { animation: lbInfoIn .6s var(--ease) .12s backwards; }
+.fx .lb-box { isolation: isolate; }
+.fx .lb-box::before { content: ''; position: absolute; left: -10%; top: -6%; width: 62%; height: 112%; z-index: -1; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--ar) var(--ag) var(--ab) / .6), transparent 78%); }
+.fx .lb-photo img.swap { animation: imgSwap .55s var(--ease); }
+
+/* ---------- Cursor ring (desktop with a mouse) ---------- */
+@media (hover: hover) and (pointer: fine) {
+  .fx .cursor { display: block; position: fixed; left: 0; top: 0; z-index: 450; pointer-events: none; opacity: 0; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%;
+    border: 1.5px solid rgb(var(--ar) var(--ag) var(--ab) / .95); transform: translate(-200px, -200px);
+    transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background-color .35s, opacity .3s; }
+  .fx.has-cursor .cursor { opacity: 1; }
+  .fx .cursor { display: grid; place-items: center; font: 500 .7rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #fff; }
+  .fx .cursor.is-hover { width: 82px; height: 82px; margin: -41px 0 0 -41px; background: rgb(var(--ar) var(--ag) var(--ab) / .5); }
+  .fx .cursor.is-link { width: 58px; height: 58px; margin: -29px 0 0 -29px; }
+}
+
+/* ---------- Floating buttons: soft pulse ---------- */
+.fx .fab::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25d366; pointer-events: none; animation: pulse 2.4s ease-out infinite; }
+.fx .fab-ig::before { border-color: #e1306c; animation-delay: 1.2s; }
+@keyframes pulse { from { transform: scale(1); opacity: .8; } to { transform: scale(1.7); opacity: 0; } }
+
+/* =========================================================
+   Whole-page effects: the same pattern as the first screen,
+   from the catalogue down to the footer.
+   ========================================================= */
+
+/* things that only move while they are on screen */
+.fx .paused, .fx .paused *, .fx .paused *::before, .fx .paused *::after { animation-play-state: paused !important; }
+
+/* thin progress line (the aura colour) and a header that gains depth once you scroll */
+.fx .progress { display: block; position: fixed; left: 0; top: 0; height: 3px; width: 100%; z-index: 400; pointer-events: none; background: rgb(var(--ar) var(--ag) var(--ab)); transform: scaleX(0); transform-origin: 0 50%; }
+.fx .nav a { transition: color .3s; }
+.fx .nav a::after { transition: transform .45s var(--ease); }
+
+/* every section has soft drifting colour and twinkling stars behind its content */
+.amb { display: block; position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.amb .b { position: absolute; width: min(60vw, 680px); aspect-ratio: 1; border-radius: 50%; }
+.fx .amb .b { animation: drift 20s ease-in-out infinite alternate; }
+.amb .b1 { left: -12%; top: -10%; }
+.amb .b2 { right: -14%; top: 28%; }
+.amb .b3 { left: 30%; bottom: -24%; }
+.fx .amb .b2 { animation-duration: 26s; animation-direction: alternate-reverse; }
+.fx .amb .b3 { animation-duration: 23s; }
+.amb-dark .b1 { background: radial-gradient(closest-side, rgba(255, 72, 172, .20), transparent 100%); }
+.amb-dark .b2 { background: radial-gradient(closest-side, rgba(64, 128, 255, .22), transparent 100%); }
+.amb-dark .b3 { background: radial-gradient(closest-side, rgb(var(--ar) var(--ag) var(--ab) / .18), transparent 100%); }
+.amb-light .b1 { background: radial-gradient(closest-side, rgba(240, 140, 190, .30), transparent 100%); }
+.amb-light .b2 { background: radial-gradient(closest-side, rgba(150, 120, 255, .22), transparent 100%); }
+.amb-light .b3 { background: radial-gradient(closest-side, rgba(216, 181, 116, .32), transparent 100%); }
+@keyframes drift { from { transform: translate(-4%, 3%) scale(.95); } to { transform: translate(5%, -4%) scale(1.08); } }
+.amb .st { position: absolute; width: 14px; height: 14px; opacity: .7; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+.fx .amb .st { animation: twk 3.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.amb-dark .st { background: #ecd29a; }
+.amb-light .st { background: #b88f45; }
+
+/* headings are wiped in, lines are drawn, cards are unveiled */
+@keyframes wipe { from { clip-path: inset(0 100% 0 0); } }
+@keyframes draw { from { transform: scaleX(0); } }
+@keyframes unveil { from { clip-path: inset(100% 0 0 0); } }
+@keyframes settle { from { transform: scale(1.18); } }
+@keyframes numPop { from { opacity: 0; transform: translateY(14px) scale(.6) rotate(-8deg); } }
+.fx .sec-title.in { animation: rise .85s var(--ease) var(--d, 0s) backwards, wipe 1.1s var(--ease) var(--d, 0s) backwards; }
+.fx .coll-head.in h3 { animation: wipe 1s var(--ease) .1s backwards; }
+.fx .coll, .fx .pillar { position: relative; border-top-color: transparent; }
+.fx .coll::before, .fx .pillar::before { content: ''; position: absolute; left: 0; right: 0; top: -1px; height: 2px; transform-origin: 0 50%; }
+.fx .coll::before { background: var(--gold); }
+.fx .pillar::before { background: var(--c); }
+.fx .dl.pre::before { transform: scaleX(0); }
+.fx .dl.in::before { animation: draw 1.3s var(--ease) var(--d, 0s) backwards; }
+.fx .card.in .card-media { animation: unveil 1.1s var(--ease) calc(var(--d, 0s) + .05s) backwards; }
+.fx .card.in .card-media img { animation: settle 1.6s var(--ease) calc(var(--d, 0s) + .05s) backwards; }
+.fx .coll-tile.in { animation: rise .85s var(--ease) var(--d, 0s) backwards, unveil 1.1s var(--ease) calc(var(--d, 0s) + .05s) backwards; }
+.fx .steps li.in .num { animation: numPop .9s var(--ease) calc(var(--d, 0s) + .15s) backwards; }
+.fx .pillar.in h3 { animation: wipe .9s var(--ease) calc(var(--d, 0s) + .1s) backwards; }
+.fx .pillar h3 { transition: color .5s var(--ease), transform .7s var(--ease), letter-spacing .7s var(--ease); }
+.fx .pillar p { transition: color .5s; }
+.fx .steps h3 { transition: color .3s; }
+.fx .steps li:hover h3 { color: var(--gold-d); }
+
+/* buttons shine on hover */
+.fx .btn { position: relative; overflow: hidden; }
+.fx .btn::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 32%, rgba(255, 255, 255, .38) 50%, transparent 68%); transform: translateX(-130%); }
+.fx .btn:hover::after { transform: translateX(130%); transition: transform .9s var(--ease); }
+
+/* contact: a light travels round the form, fields draw their underline, links glide */
+.fx .enquiry { position: relative; overflow: hidden; }
+.fx .enquiry > * { position: relative; z-index: 1; }
+.fx .enquiry::before { content: ''; position: absolute; inset: -70%; z-index: 0; background: conic-gradient(from 0deg, transparent 0 72%, rgb(var(--ar) var(--ag) var(--ab) / .85) 86%, transparent 100%); animation: spin 9s linear infinite; }
+.fx .enquiry::after { content: ''; position: absolute; inset: 1px; z-index: 0; border-radius: 9px; background: #181031; }
+.fx .field input, .fx .field select, .fx .field textarea { background-image: linear-gradient(var(--gold), var(--gold)); background-repeat: no-repeat; background-position: 0 100%; background-size: 0 2px; transition: background-size .5s var(--ease), border-color .3s; }
+.fx .field input:focus, .fx .field select:focus, .fx .field textarea:focus { background-size: 100% 2px; }
+.fx .big-link { transition: transform .4s var(--ease); }
+.fx .big-link:hover { transform: translateX(6px); }
+.fx .big-link .ico { animation: iconBeat 2.6s ease-in-out infinite; }
+@keyframes iconBeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+.fx .side-link { transition: transform .35s var(--ease), color .3s; }
+.fx .side-link:hover { transform: translateX(5px); }
+
+/* the dark marquee runs the other way, and the footer logo glows */
+.fx .marquee-dark .marquee-track { animation-direction: reverse; animation-duration: 36s; }
+.fx .foot-brand { position: relative; }
+.fx .foot-brand::before { content: ''; position: absolute; left: 0; top: 0; width: 72px; height: 72px; border-radius: 50%; border: 1px solid rgba(216, 181, 116, .7); pointer-events: none; animation: ring 2.8s ease-out infinite; }
+.fx .foot-brand img { animation: logoGlow 4s ease-in-out infinite; }
+
+/* the colour glow in the collection follows the outfit you point at (or the one in the middle of the screen on a phone) */
+.stage-glow { display: block; position: absolute; left: 0; top: 0; width: 1000px; height: 1000px; margin: -500px 0 0 -500px; z-index: 0; pointer-events: none;
+  background: radial-gradient(closest-side, rgb(var(--ar) var(--ag) var(--ab) / .42), rgb(var(--ar) var(--ag) var(--ab) / .12) 55%, transparent);
+  transform: translate(60vw, 420px); }
+.fx .stage-glow { will-change: transform; transition: transform 1.3s var(--ease); }
+.fx .chip { transition: background-color .3s, color .3s, border-color .3s; }
+.fx .fab-tip { transition: opacity .3s, transform .4s var(--ease); }
+.fx .lb-photo img { transition: transform .5s var(--ease); }
+.fx .lb-photo.zoomed img { transition-duration: .35s; }
+.fx .lb-thumbs button { transition: opacity .3s, transform .4s var(--ease), box-shadow .3s; }
+.fx .lb-thumbs button:hover { transform: translateY(-3px); }
+.fx .lb-hint { transition: opacity .4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fx *, .fx *::before, .fx *::after { animation: none !important; transition: none !important; }
+  .fx .rv.pre { opacity: 1; }
+}

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Google Analytics (Google tag). The next line is Google's own tag, high in the head, exactly where Google looks for it.
+       The settings line below it counts visits on any web address the site is published on (Netlify, your own domain, any host), but not on a copy
+       on your own computer or home network (skip) and not for visitors who set "Do Not Track". The Measurement ID is in two places: the id= in the tag line and measurementId in the settings.
+       To use Google Tag Manager instead: delete the tag line, put your container ID (it was GTM-T8NDGMH7) in gtmId and empty measurementId. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YR6VZ5WFHB"></script>
+  <script>
+    window.AURA_GA = { gtmId: '', measurementId: 'G-YR6VZ5WFHB', skip: ['localhost', '127.0.0.1'] };
+    (function (w, d, c) {
+      try {
+        var gtm = /^GTM-[A-Z0-9]{4,12}$/i.test(c.gtmId || ''), ga4 = !gtm && /^G-[A-Z0-9]{6,14}$/i.test(c.measurementId || '');
+        if (!gtm && !ga4) return;                                          // no ID: nothing is counted
+        var debug = /[?&]ga=debug\b/.test(location.search), h = location.hostname.toLowerCase(), mine = !h || location.protocol === 'file:' || /(^|\.)local$|^(10|192\.168|172\.(1[6-9]|2\d|3[01]))\./.test(h), i;
+        for (i = 0; i < c.skip.length; i++) { if (h === String(c.skip[i]).toLowerCase()) mine = true; }
+        if (mine && !debug) return;                                        // a copy on your own computer or network: nothing is counted (?ga=debug = test mode)
+        if (!debug && (navigator.doNotTrack === '1' || w.doNotTrack === '1')) return;
+        w.dataLayer = w.dataLayer || [];
+        if (gtm) {                                                         // Google Tag Manager (the tag line above is deleted in this case)
+          w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+          var s = d.createElement('script'); s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtm.js?id=' + c.gtmId;
+          d.head.appendChild(s);                                           // async: it never holds the page up
+        } else {                                                           // Google Analytics 4: the tag line above does the loading, this starts the counting
+          var gtag = function () { w.dataLayer.push(arguments); };
+          gtag('js', new Date());
+          var cfg = { allow_google_signals: false, allow_ad_personalization_signals: false };
+          if (debug) cfg.debug_mode = true;
+          gtag('config', c.measurementId, cfg);
+        }
+        c.active = true; c.mode = gtm ? 'gtm' : 'gtag';
+      } catch (e) { /* statistics must never break the shop */ }
+    })(window, document, window.AURA_GA);
+  </script>
+  <title>Aura Magic | Elegance in Every Aura – Women's Ethnic Wear</title>
+  <meta name="description" content="Aura Magic – trendy, stylish and timeless women's maxi frocks, kurtis, sets and tops in premium quality at affordable prices. Order easily on WhatsApp or Instagram.">
+  <meta name="theme-color" content="#130d2c">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Aura Magic | Elegance in Every Aura">
+  <meta property="og:description" content="Trendy, stylish and timeless maxi frocks, kurtis, sets and tops. Premium quality, affordable luxury.">
+  <meta property="og:image" content="images/logo.jpg">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Jost:wght@300..600&display=swap" rel="stylesheet">
+  <script>
+    (function () {   // effects are ON unless the visitor switched them off or asked their device for less motion
+      var d = document.documentElement, off = false;
+      d.classList.add('js');
+      try { off = localStorage.getItem('am-fx') === 'off'; } catch (e) { /* ignore */ }
+      if (/[?&]fx=on\b/.test(location.search)) { off = false; d.classList.add('fx-forced'); }   // ...?fx=on always shows the full effects
+      var rm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!off && !rm) d.classList.add('fx');
+      setTimeout(function () { d.classList.add('loaded'); }, 2800);   // the loader can never get stuck
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/fx.css">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ClothingStore","name":"Aura Magic","slogan":"Elegance in Every Aura","email":"auramagic26@gmail.com","telephone":"+919384889111","image":"images/logo.jpg","sameAs":["https://www.instagram.com/auramagic_26/"]}
+  </script>
+</head>
+<body>
+
+<!-- Loader (effects mode only; it hides itself after the page is ready) -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pre-logo"><img src="images/logo-small.jpg" width="260" height="260" alt=""></div>
+  <p class="pre-text">Elegance in Every Aura</p>
+  <div class="pre-line"><i></i></div>
+</div>
+<div class="cursor" id="cursor" aria-hidden="true"><span id="cursorLabel"></span></div>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- Icons -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path fill="currentColor" d="M12 1.5c.6 5.4 3.6 8.4 9 9-5.4.6-8.4 3.6-9 9-.6-5.4-3.6-8.4-9-9 5.4-.6 8.4-3.6 9-9z"/></symbol>
+  <symbol id="i-zoom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21M10.5 8v5M8 10.5h5"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></symbol>
+</svg>
+
+<!-- Header -->
+<header class="site-header" id="top">
+  <div class="head-row">
+    <a class="brand" href="#home" aria-label="Aura Magic – home">Aura Magic</a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#collections">Collections</a>
+      <a href="#why">Why Aura Magic</a>
+      <a href="#order">How to order</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-wa btn-sm head-wa" data-wa href="https://wa.me/919384889111" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
+    <a class="head-ig" data-ig href="https://ig.me/m/auramagic_26" target="_blank" rel="noopener" aria-label="Message Aura Magic on Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+    <button class="fx-toggle" id="fxToggle" type="button" aria-pressed="true" title="Turn the visual effects on or off"><svg aria-hidden="true"><use href="#i-spark"/></svg><span id="fxLabel">Effects on</span></button>
+  <button class="burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <canvas class="sparkles" id="sparkles" aria-hidden="true"></canvas>
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1 class="sr-only">Aura Magic – Elegance in Every Aura</h1>
+      <div class="logo-stage" id="logoStage">
+        <canvas class="smoke" id="smoke" aria-hidden="true"></canvas>
+        <div class="logo-in">
+          <div class="logo-tilt" id="logoTilt">
+            <div class="logo-float">
+              <img class="logo-img" src="images/logo.jpg" width="1254" height="1254" alt="Aura Magic – Elegance in Every Aura" loading="lazy" decoding="async">
+              <img class="logo-img-fx" src="images/logo-glow.webp" width="900" height="900" alt="Aura Magic – Elegance in Every Aura" fetchpriority="high" decoding="async" onerror="this.style.display='none';var j=this.parentNode.querySelector('.logo-img');if(j)j.style.display='block'">
+              <span class="logo-orbit" aria-hidden="true"></span>
+              <svg class="tw" style="left:21%;top:18%;--d:0s" aria-hidden="true"><use href="#i-spark"/></svg>
+              <svg class="tw" style="left:69%;top:25.5%;--d:1.1s" aria-hidden="true"><use href="#i-spark"/></svg>
+              <svg class="tw" style="left:83.5%;top:18.5%;--d:2.1s" aria-hidden="true"><use href="#i-spark"/></svg>
+              <svg class="tw" style="left:88%;top:70%;--d:.6s" aria-hidden="true"><use href="#i-spark"/></svg>
+              <svg class="tw" style="left:10%;top:59%;--d:1.7s" aria-hidden="true"><use href="#i-spark"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="hero-tagline hero-fade"><svg class="spark" aria-hidden="true"><use href="#i-spark"/></svg>Elegance in Every Aura<svg class="spark" aria-hidden="true"><use href="#i-spark"/></svg></p>
+      <p class="hero-lede hero-fade">Trendy, stylish and timeless maxi frocks, kurtis, sets and tops in premium quality. Pick the one you love and order it in a single WhatsApp or Instagram message.</p>
+      <div class="hero-cta hero-fade">
+        <a class="btn btn-ivory" href="#collections">Shop the collections</a>
+        <a class="btn btn-wa" data-wa href="https://wa.me/919384889111" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span><span class="long">Order on </span>WhatsApp</span></a>
+        <a class="btn btn-ig" data-ig href="https://ig.me/m/auramagic_26" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg><span><span class="long">Order on </span>Instagram</span></a>
+      </div>
+      <p class="hero-tags hero-fade"><span>Trendy • Stylish • Timeless</span><span>Premium Quality | Affordable Luxury</span></p>
+    </div>
+
+    <div class="hero-stage" id="heroStage">
+      <div class="arch-wrap">
+        <div class="halo" aria-hidden="true"></div>
+        <div class="arch-echo" aria-hidden="true"></div>
+        <div class="arch" id="arch" role="button" tabindex="0" data-cursor="View" data-open="cotton-maxi-first" aria-label="View this outfit">
+          <img class="slide is-active" src="images/cream-bird.webp" width="1000" height="1500" alt="Model wearing the Garden Bird cotton maxi frock">
+        </div>
+      </div>
+      <div class="hero-caption">
+        <div>
+          <p class="cap-name" id="heroName">Garden Bird Maxi</p>
+          <p class="cap-set" id="heroSet">Cotton Maxi Frock</p>
+        </div>
+        <button class="btn btn-line btn-sm" id="heroView" type="button" data-open="cream-bird"><svg class="ico" aria-hidden="true"><use href="#i-zoom"/></svg>View outfit</button>
+      </div>
+      <div class="hero-dots" id="heroDots" role="group" aria-label="Browse outfits"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="mq-group"><span>Trendy</span><svg class="spark"><use href="#i-spark"/></svg><span>Stylish</span><svg class="spark"><use href="#i-spark"/></svg><span>Timeless</span><svg class="spark"><use href="#i-spark"/></svg><span>Premium Quality</span><svg class="spark"><use href="#i-spark"/></svg><span>Affordable Luxury</span><svg class="spark"><use href="#i-spark"/></svg><span>Elegance in Every Aura</span><svg class="spark"><use href="#i-spark"/></svg></div>
+    <div class="mq-group"><span>Trendy</span><svg class="spark"><use href="#i-spark"/></svg><span>Stylish</span><svg class="spark"><use href="#i-spark"/></svg><span>Timeless</span><svg class="spark"><use href="#i-spark"/></svg><span>Premium Quality</span><svg class="spark"><use href="#i-spark"/></svg><span>Affordable Luxury</span><svg class="spark"><use href="#i-spark"/></svg><span>Elegance in Every Aura</span><svg class="spark"><use href="#i-spark"/></svg></div>
+  </div>
+</div>
+
+<!-- Collections -->
+<section class="section collections" id="collections">
+  <div class="amb amb-dark" aria-hidden="true"><i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="st" style="left:6%;top:18%;--d:.3s"></i><i class="st" style="left:93%;top:12%;--d:1.4s"></i><i class="st" style="left:12%;top:82%;--d:.9s"></i><i class="st" style="left:88%;top:76%;--d:2s"></i></div>
+  <div class="stage-glow" id="stageGlow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="sec-head">
+      <h2 class="sec-title">Our Collections</h2>
+      <p class="sec-sub">Choose a collection to see every style in it. Tap any photo for details, then order on WhatsApp or Instagram.</p>
+    </div>
+    <ul class="coll-stats" aria-label="The catalogue at a glance">
+      <li><b id="statStyles" data-count>78</b><span>styles</span></li>
+      <li><b id="statColls" data-count>12</b><span>collections</span></li>
+      <li><b id="statFrom" data-count>₹399</b><span>prices start at</span></li>
+    </ul>
+    <div class="coll-index" id="collIndex"></div>
+    <noscript><p class="sec-sub">Please turn on JavaScript to see the collections, or message us on WhatsApp.</p></noscript>
+    <nav class="chips" id="chips" aria-label="Jump to a collection"></nav>
+    <div id="catalogue"></div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="section why" id="why">
+  <div class="amb amb-light" aria-hidden="true"><i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="st" style="left:8%;top:14%;--d:0s"></i><i class="st" style="left:90%;top:22%;--d:1.1s"></i><i class="st" style="left:18%;top:78%;--d:.6s"></i><i class="st" style="left:82%;top:70%;--d:1.7s"></i><i class="st" style="left:50%;top:8%;--d:2.2s"></i></div>
+  <div class="container">
+    <h2 class="sec-title">Why Aura Magic</h2>
+    <ul class="pillars">
+      <li class="pillar" style="--c:#13708a"><h3>Trendy</h3><p>Fresh prints and silhouettes that follow what is in style, so you are always a step ahead.</p></li>
+      <li class="pillar" style="--c:#c2347d"><h3>Stylish</h3><p>Thoughtful details like contrast piping, tassels, applique and elegant necklines lift every look.</p></li>
+      <li class="pillar" style="--c:#c98d00"><h3>Timeless</h3><p>Classic maxi frocks, kurtis, sets and tops in colours and craft that stay beautiful season after season.</p></li>
+      <li class="pillar" style="--c:#4d7c2a"><h3>Premium Quality</h3><p>Carefully chosen fabrics and neat finishing, so each piece feels as good as it looks.</p></li>
+      <li class="pillar" style="--c:#7b55d6"><h3>Affordable Luxury</h3><p>The feel of luxury without the heavy price tag. Elegance that fits your budget.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- How to order -->
+<section class="section order" id="order">
+  <div class="amb amb-light" aria-hidden="true"><i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="st" style="left:6%;top:18%;--d:.3s"></i><i class="st" style="left:93%;top:12%;--d:1.4s"></i><i class="st" style="left:12%;top:82%;--d:.9s"></i><i class="st" style="left:88%;top:76%;--d:2s"></i></div>
+  <div class="container">
+    <h2 class="sec-title">How to order</h2>
+    <ol class="steps">
+      <li><span class="num">1</span><h3>Choose your style</h3><p>Open a collection and tap any outfit to see it up close.</p></li>
+      <li><span class="num">2</span><h3>Message us</h3><p>Press “Order on WhatsApp” or “Order on Instagram”. On WhatsApp your outfit is filled in for you; on Instagram we copy it and show you how to paste it in the chat.</p></li>
+      <li><span class="num">3</span><h3>Confirm the details</h3><p>Tell us your size and delivery address. We confirm the price and delivery with you.</p></li>
+      <li><span class="num">4</span><h3>Wear your aura</h3><p>Your outfit arrives at your door, ready for your next occasion.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section contact" id="contact">
+  <div class="amb amb-dark" aria-hidden="true"><i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="st" style="left:8%;top:14%;--d:0s"></i><i class="st" style="left:90%;top:22%;--d:1.1s"></i><i class="st" style="left:18%;top:78%;--d:.6s"></i><i class="st" style="left:82%;top:70%;--d:1.7s"></i><i class="st" style="left:50%;top:8%;--d:2.2s"></i></div>
+  <div class="container contact-grid">
+    <div class="contact-copy">
+      <h2 class="sec-title">Message us to order</h2>
+      <p class="sec-sub">Order on WhatsApp or Instagram, whichever you prefer. Tell us the outfit you like, your size and your city, and we will take it from there.</p>
+      <a class="big-link" data-wa href="https://wa.me/919384889111" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg><span>+91 93848 89111</span></a>
+      <a class="side-link" href="mailto:auramagic26@gmail.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg><span>auramagic26@gmail.com</span></a>
+      <a class="side-link" href="https://www.instagram.com/auramagic_26/" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg><span>Follow @auramagic_26 on Instagram</span></a>
+    </div>
+    <form class="enquiry" id="enquiry" novalidate>
+      <div class="field">
+        <label for="fName">Your name</label>
+        <input id="fName" name="name" type="text" autocomplete="name" required placeholder="Priya">
+        <span class="err" id="fNameErr" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="fOutfit">Which outfit?</label>
+        <select id="fOutfit" name="outfit"></select>
+      </div>
+      <div class="field">
+        <label for="fMsg">Message <small>(optional)</small></label>
+        <textarea id="fMsg" name="message" rows="3" placeholder="Size, city, any questions"></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-wa" type="submit"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Send on WhatsApp</button>
+        <button class="btn btn-ig" type="button" id="fIg"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Send on Instagram</button>
+      </div>
+      <p class="form-note">WhatsApp opens with your message ready to send. On Instagram we copy your message and show you how to paste it in the chat.</p>
+    </form>
+  </div>
+</section>
+
+<div class="marquee marquee-dark" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="mq-group"><span>Order on WhatsApp</span><svg class="spark"><use href="#i-spark"/></svg><span>Order on Instagram</span><svg class="spark"><use href="#i-spark"/></svg><span>Premium Quality</span><svg class="spark"><use href="#i-spark"/></svg><span>Affordable Luxury</span><svg class="spark"><use href="#i-spark"/></svg><span>Aura Magic</span><svg class="spark"><use href="#i-spark"/></svg></div>
+    <div class="mq-group"><span>Order on WhatsApp</span><svg class="spark"><use href="#i-spark"/></svg><span>Order on Instagram</span><svg class="spark"><use href="#i-spark"/></svg><span>Premium Quality</span><svg class="spark"><use href="#i-spark"/></svg><span>Affordable Luxury</span><svg class="spark"><use href="#i-spark"/></svg><span>Aura Magic</span><svg class="spark"><use href="#i-spark"/></svg></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="amb amb-dark" aria-hidden="true"><i class="b b1"></i><i class="b b2"></i><i class="b b3"></i><i class="st" style="left:8%;top:14%;--d:0s"></i><i class="st" style="left:90%;top:22%;--d:1.1s"></i><i class="st" style="left:18%;top:78%;--d:.6s"></i><i class="st" style="left:82%;top:70%;--d:1.7s"></i><i class="st" style="left:50%;top:8%;--d:2.2s"></i></div>
+  <div class="container foot-grid">
+    <div class="foot-brand">
+      <img src="images/logo-small.jpg" alt="Aura Magic logo" width="72" height="72">
+      <div><p class="foot-name">Aura Magic</p><p class="foot-tag">Elegance in Every Aura</p></div>
+    </div>
+    <nav class="foot-nav" aria-label="Footer">
+      <a href="#collections">Collections</a>
+      <a href="#why">Why Aura Magic</a>
+      <a href="#order">How to order</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="foot-contact">
+      <a data-wa href="https://wa.me/919384889111" target="_blank" rel="noopener">WhatsApp +91 93848 89111</a>
+      <a href="mailto:auramagic26@gmail.com">auramagic26@gmail.com</a>
+      <a href="https://www.instagram.com/auramagic_26/" target="_blank" rel="noopener">Instagram @auramagic_26</a>
+    </div>
+  </div>
+  <div class="container foot-bottom">
+    <p>&copy; <span id="year">2026</span> Aura Magic. All rights reserved.</p>
+    <p>Trendy • Stylish • Timeless</p>
+  </div>
+</footer>
+
+<!-- Floating order buttons (appear after the first screen) -->
+<a class="fab fab-ig" data-ig href="https://ig.me/m/auramagic_26" target="_blank" rel="noopener" aria-label="Message Aura Magic on Instagram" hidden><svg aria-hidden="true"><use href="#i-ig"/></svg><span class="fab-tip">Message us on Instagram</span></a>
+<a class="fab fab-wa" data-wa href="https://wa.me/919384889111" target="_blank" rel="noopener" aria-label="Chat with Aura Magic on WhatsApp" hidden><svg aria-hidden="true"><use href="#i-wa"/></svg><span class="fab-tip">Chat with us</span></a>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- Order on Instagram (two simple steps) -->
+<div class="igd" id="igd" role="dialog" aria-modal="true" aria-labelledby="igdTitle" hidden>
+  <div class="igd-box">
+    <button class="igd-close" id="igdClose" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <h3 id="igdTitle">Order on Instagram</h3>
+    <p class="igd-lead">Instagram cannot fill in your message for you, so it takes two quick steps.</p>
+    <ol class="igd-steps">
+      <li>
+        <p><strong>Step 1.</strong> Copy your order message.</p>
+        <textarea id="igdText" rows="5" readonly></textarea>
+        <div class="igd-row"><button class="btn btn-ivory btn-sm" id="igdCopy" type="button">Copy message</button><span class="igd-copied" id="igdCopied" hidden>Copied ✓</span></div>
+      </li>
+      <li>
+        <p><strong>Step 2.</strong> Open our Instagram chat, paste the message (press and hold, then Paste) and press send.</p>
+        <a class="btn btn-ig" id="igdOpen" href="https://ig.me/m/auramagic_26" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Open Instagram chat</a>
+      </li>
+    </ol>
+    <p class="igd-note">Want the message filled in automatically? <a id="igdWa" href="#" target="_blank" rel="noopener">Order on WhatsApp instead</a>.</p>
+  </div>
+</div>
+
+<!-- Outfit pop-up -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <div class="lb-box">
+    <button class="lb-close" id="lbClose" type="button" aria-label="Close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="lb-photo" id="lbPhoto"><img id="lbImg" src="" alt="" width="1000" height="1250" draggable="false"><span class="lb-hint" aria-hidden="true"><svg><use href="#i-zoom"/></svg>Click to zoom</span></div>
+    <div class="lb-info">
+      <p class="lb-coll" id="lbColl"></p>
+      <h3 id="lbTitle"></h3>
+      <p class="lb-set" id="lbSet"></p>
+      <p class="lb-desc" id="lbDesc"></p>
+      <dl class="lb-facts">
+        <div><dt>Colour</dt><dd id="lbColour"></dd></div>
+        <div><dt>Price</dt><dd id="lbPrice"></dd></div>
+        <div><dt>Sizes</dt><dd id="lbSizes"></dd></div>
+      </dl>
+      <div class="lb-actions">
+        <a class="btn btn-wa" id="lbWa" href="#" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg>Order on WhatsApp</a>
+        <a class="btn btn-ig" id="lbIg" href="https://ig.me/m/auramagic_26" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-ig"/></svg>Order on Instagram</a>
+      </div>
+      <div class="lb-more">
+        <button type="button" class="lb-link" id="lbShare"><svg aria-hidden="true"><use href="#i-share"/></svg>Share this outfit</button>
+        <a class="lb-link" id="lbMail" href="#"><svg aria-hidden="true"><use href="#i-mail"/></svg>Email us</a>
+      </div>
+      <div class="lb-nav">
+        <button type="button" class="lb-step" id="lbPrev" aria-label="Previous outfit"><svg aria-hidden="true"><use href="#i-prev"/></svg>Previous</button>
+        <span id="lbCount"></span>
+        <button type="button" class="lb-step" id="lbNext" aria-label="Next outfit">Next<svg aria-hidden="true"><use href="#i-next"/></svg></button>
+      </div>
+      <div class="lb-thumbs" id="lbThumbs" role="group" aria-label="Other outfits in this collection"></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js" defer></script>
+<script src="js/fx.js" defer></script>
+<script src="js/analytics.js" defer></script>
+</body>
+</html>
